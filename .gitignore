@@ -1,0 +1,19 @@
+# python cache
+__pycache__/
+*.pyc
+
+# virtual env
+.venv/
+venv/
+
+# secrets
+.env
+
+# logs
+*.log
+!sample_app.log
+
+# others
+.vscode/
+.DS_Store
+Thumbs.db
