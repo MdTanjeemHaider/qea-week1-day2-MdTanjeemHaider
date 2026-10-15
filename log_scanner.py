@@ -70,8 +70,8 @@ for raw_line in log_text.splitlines():
 
     if "| ERROR |" in line:
         error_count += 1
-        if line_number == 1:
-            first_error_line = line
+        if first_error_line == 0:
+            first_error_line = line_number
         print(f'ERROR on line {line_number}: {line}')
     elif "| WARN |" in line:
         warn_count += 1
@@ -82,6 +82,7 @@ for raw_line in log_text.splitlines():
 
 # ---- TODO 3: the verdict -------------------------------------------------------
 # verdict = "PASS" if error_count is 0, otherwise "FAIL"  (if / else)
+verdict = "PASS" if error_count == 0 else "FAIL"
 
 # ---- Summary (provided, except the two TODO lines) ----------------------------
 print()
@@ -94,4 +95,9 @@ print(f"INFO: {info_count}")
 print(f"UNKNOWN: {unknown_count}")
 # TODO 4: if first_error_line > 0 print f"First ERROR: line {first_error_line}"
 #         else print "First ERROR: none"
+if first_error_line > 0:
+    print(f"First ERROR: line {first_error_line}")
+else:
+    print("First ERROR: none")
 # TODO 5: print f"Verdict: {verdict}"
+print(f"Verdict: {verdict}")
