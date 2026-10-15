@@ -29,24 +29,39 @@ result = "NONE"         # must end as "WIN", "LOSE" or "QUIT"
 print(f"Guess the number between {MIN_NUMBER} and {MAX_NUMBER}. "
       f"You have {MAX_ATTEMPTS} attempts. Type q to quit.")
 
-# ---- TODO 1: the game loop ---------------------------------------------------
-# Build a `while True:` loop. Inside it, in THIS order (order matters!):
-#   a) read the answer:  answer = input("Guess (1-100): ").strip()
-#   b) if answer is "q" (any case): print "You quit. The number was <SECRET_NUMBER>."
-#        set result = "QUIT"  and  break
-#   c) if answer is not all digits (.isdigit()): print
-#        "Invalid input: please type a whole number."  and  continue
-#        (does NOT use up an attempt)
-#   d) convert with int(); if outside MIN_NUMBER..MAX_NUMBER: print
-#        "Out of range: choose a number from 1 to 100."  and  continue
-#        (does NOT use up an attempt)
-#   e) now it is a real guess:  attempts += 1
-#   f) if/elif/else:  "Too low"  /  "Too high"  /
-#        "Correct! You needed <attempts> attempts."  -> result = "WIN" and break
-#   g) if attempts >= MAX_ATTEMPTS (and the guess was wrong): print
-#        "Out of attempts! The number was <SECRET_NUMBER>."
-#        result = "LOSE" and break
-# Commit when the loop works for a WIN. Then commit again after LOSE/QUIT.
+while True:
+    answer = input("Guess (1-100): ").strip()
+
+    if answer.lower() == "q":
+        print(f'You quit. The number was {SECRET_NUMBER}.')
+        result = "QUIT"
+        break
+
+    if not answer.isdigit():
+        print("Invalid input: please type a whole number.")
+        continue
+
+    answer = int(answer)
+
+    if answer < MIN_NUMBER or answer > MAX_NUMBER:
+        print("Out of range: choose a number from 1 to 100.")
+        continue
+
+    attempts += 1
+
+    if answer > SECRET_NUMBER:
+        print("Too High")
+    elif answer < SECRET_NUMBER:
+        print("Too Low")
+    else:
+        print(f'Correct! You needed {attempts} attempts.')
+        result = "WIN"
+        break
+
+    if attempts >= MAX_ATTEMPTS:
+        print(f'Out of attempts! The number was {SECRET_NUMBER}.')
+        result = "LOSE"
+        break
 
 # ---- Final line (provided; the checker reads this) --------------------------
 print(f"RESULT: {result} attempts={attempts}")
