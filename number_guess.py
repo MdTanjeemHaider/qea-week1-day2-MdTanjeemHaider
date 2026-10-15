@@ -52,6 +52,7 @@ while True:
 
     if answer.lower() == "q":
         print(f'You quit. The number was {SECRET_NUMBER}.')
+        result = "QUIT"
         break
 
     if not answer.isdigit():
@@ -62,6 +63,7 @@ while True:
 
     if answer < MIN_NUMBER or answer > MAX_NUMBER:
         print("Out of range: choose a number from 1 to 100.")
+        continue
 
     attempts += 1
 
@@ -72,7 +74,12 @@ while True:
     else:
         print(f'Correct! You needed {attempts} attempts.')
         result = "WIN"
-        break  
+        break
+
+    if attempts >= MAX_ATTEMPTS:
+        print(f'Out of attempts! The number was {SECRET_NUMBER}.')
+        result = "LOSE"
+        break
 
 # ---- Final line (provided; the checker reads this) --------------------------
 print(f"RESULT: {result} attempts={attempts}")
